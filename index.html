@@ -3,71 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I LOVE YOU MOTU</title>
+    <title>I LOVE YOU Motu</title>
     <style>
         body {
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            text-align: center;
-            font-family: 'Arial', sans-serif;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
+            background: linear-gradient(45deg, #ff758c, #ff7eb3, #ff92c2, #ff9fc9);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
             overflow: hidden;
         }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         h1 {
-            font-size: 40px;
-            color: #e63946;
+            font-size: 4rem;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            text-shadow: 0px 0px 10px rgba(255,255,255,0.8);
+            animation: glow 2s infinite alternate;
         }
-        p {
-            font-size: 18px;
-            color: #333;
+
+        @keyframes glow {
+            0% { text-shadow: 0px 0px 10px rgba(255,255,255,0.5); }
+            100% { text-shadow: 0px 0px 20px rgba(255,255,255,1); }
         }
-        .heart {
+
+        /* Floating Particles Effect */
+        .particle {
             position: absolute;
-            width: 100px;
-            height: 100px;
-            background-color: #e63946;
-            transform: rotate(-45deg);
-            top: -30px;
-            left: -30px;
-            animation: heartbeat 1.5s infinite;
-        }
-        .heart:before, .heart:after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background-color: #e63946;
+            width: 10px;
+            height: 10px;
+            background-color: white;
             border-radius: 50%;
+            opacity: 0.8;
+            animation: floatUp linear infinite;
         }
-        .heart:before {
-            top: -50px;
-            left: 0;
-        }
-        .heart:after {
-            left: 50px;
-            top: 0;
-        }
-        @keyframes heartbeat {
-            0% { transform: scale(1) rotate(-45deg); }
-            50% { transform: scale(1.2) rotate(-45deg); }
-            100% { transform: scale(1) rotate(-45deg); }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 0.8; }
+            100% { transform: translateY(-100vh); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="heart"></div>
-        <h1>I LOVE YOU MOTU ❤️</h1>
-        <p>You're my favorite person in the world!</p>
-    </div>
+    <h1>I LOVE YOU Motu ❤️</h1>
+
+    <script>
+        function createParticles() {
+            for (let i = 0; i < 20; i++) {
+                let particle = document.createElement('div');
+                particle.classList.add('particle');
+                document.body.appendChild(particle);
+                let size = Math.random() * 6 + 4;
+                particle.style.width = size + "px";
+                particle.style.height = size + "px";
+                particle.style.left = Math.random() * 100 + "vw";
+                particle.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                particle.style.animationDelay = Math.random() * 2 + "s";
+            }
+        }
+        createParticles();
+    </script>
 </body>
 </html>
